@@ -107,7 +107,7 @@ def emailWarning(msg, msgType):
     subj = configurations["mailinfo"][0]["subjectwarning"]
     mailer = configurations["mailinfo"][0]["mailMethod"]
 
-    if msgType is 'Info':
+    if msgType == 'Info':
         subj = configurations["mailinfo"][0]["subjectmessage"]
 
     # Message to be sended with subject field
@@ -146,7 +146,7 @@ def emailWarning2(msg, msgType):
     password = configurations["mailinfo"][0]["password"]
     subj = configurations["mailinfo"][0]["subjectwarning"]
 
-    if msgType is 'Info':
+    if msgType == 'Info':
         subj = configurations["mailinfo"][0]["subjectmessage"]
 
     # Message to be sended with subject field
