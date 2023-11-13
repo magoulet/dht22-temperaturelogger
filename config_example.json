@@ -1,0 +1,52 @@
+{
+"mysql":[{
+	"host":"<hostname>",
+	"user":"<username>",
+	"password":"<password>",
+	"database":"<database_name>"
+	}],
+"sensors":[{
+	"sensor1":"Inside",
+	"sensor2":"N/C"
+	}],
+"triggerlimits":[{
+	"sensor1lowlimit":"12",
+	"sensor1highlimit":"30",
+	"sensor2lowlimit":"5",
+	"sensor2highlimit":"20"
+	}],
+"humiditytriggers":[{
+	"sensor1_humidity_low_limit":"30",
+	"sensor1_humidity_high_limit":"80",
+	"sensor2_humidity_low_limit":"40",
+	"sensor2_humidity_high_limit":"60"
+	}],
+"sensorgpios":[{
+	"gpiosensor1":"17",
+	"gpiosensor2":"23"
+	}],
+"mailinfo":[{
+	"mailMethod":"telegram",
+	"senderaddress":"<sender_address>",
+	"receiveraddress":"<receiver_address>",
+	"username":"<username>",
+        "password":"",
+        "key":"<mailgun_key>",
+        "sandbox":"<mailgun_sandbox>",
+        "subjectmessage":"Info from temperature logger",
+	"subjectwarning":"Warning from temperature logger"
+	}],
+"sqlBackupDump":[{
+	"backupDumpEnabled":"n",
+        "backupHour":"23",
+        "maxBackupDays":"10"
+	}],
+"connectionCheck":[{
+	"connectionCheckEnabled":"n",
+	"connectionCheckDay":"5",
+	"connectionCheckHour":"23"
+	}],
+"sensortype":"22",
+"sensoramount":"1",
+"sqlbackuppath":"<path_where_backups_are_stored>"
+}
