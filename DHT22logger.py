@@ -36,7 +36,6 @@ from datetime import timedelta
 # from email.mime.multipart import MIMEMultipart
 # from email.MIMEText import MIMEText
 import json
-import MySQLdb
 import os
 import re
 import requests
@@ -45,6 +44,7 @@ import subprocess
 import sys
 import time
 
+from sqlalchemy import create_engine, text
 
 # Import cleanup script "cleanup.py"
 import cleanup
@@ -60,9 +60,9 @@ from botMsg import telegram_bot_sendtext as sendtext
 def sensorReadings(gpio, sensor):
 
     configurations = getConfigurations()
+    pin = getattr(board, gpio)
 
-    dhtDevice = adafruit_dht.DHT22(gpio)
-
+    dhtDevice = adafruit_dht.DHT22(pin)
     while True:
         try:
             temperature_c = dhtDevice.temperature
@@ -168,21 +168,22 @@ def databaseHelper(sqlCommand,sqloperation):
 
     data = ""
 
-    db = MySQLdb.connect(host,user,password,database)
-    cursor=db.cursor()
+    # Create the SQLAlchemy engine
+    engine = create_engine(f"mysql+pymysql://{user}:{password}@{host}/{database}")
+    connection = engine.connect()
 
     if sqloperation == "Select":
         try:
-            cursor.execute(sqlCommand)
-            data = cursor.fetchone()
+            data = pd.read_sql(text(sqlCommand), connection).fetchone()
+            data = list(data)
         except:
             db.rollback()
     elif sqloperation == "Insert":
+        trans = connection.begin()
         try:
-            cursor.execute(sqlCommand)
-            db.commit()
+            connection.execute(text(sqlCommand))
+            trans.commit()
         except:
-            db.rollback()
             emailWarning("Database insert failed", "")
         sys.exit(0)
 
