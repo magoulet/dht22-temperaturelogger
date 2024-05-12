@@ -53,7 +53,7 @@ import cleanup
 scriptpath = "/home/pi/projects/tg_bot/"
 sys.path.append(os.path.abspath(scriptpath))
 
-from botMsg import telegram_bot_sendtext as sendtext
+# from botMsg import telegram_bot_sendtext as sendtext
 
 
 # function for reading DHT22 sensors
@@ -124,7 +124,8 @@ def emailWarning(msg, msgType):
         })
 
     elif mailer == "telegram":
-        sendtext(message)
+        # sendtext(message)
+        None
 
     else:
         # The actual mail sending (Gmail SMTP server)
